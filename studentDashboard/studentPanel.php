@@ -17,6 +17,18 @@ if (!empty($_SESSION)) {
 
         <link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
 
+        <?php
+        //Success of Fail message for Edit option
+        if (!empty($_SESSION['message'])) {
+            $message = $_SESSION['message'];
+        ?>
+            <script>
+                alert("<?php echo $message; ?>")
+            </script>
+        <?php
+            unset($_SESSION['message']);
+        }
+        ?>
         <title>Student Dashboard</title>
     </head>
 
@@ -33,85 +45,26 @@ if (!empty($_SESSION)) {
         <div class="panel">
             <h1>Student Dashboard</h1>
             <div class="student-panel">
-                <form class="panel-form" action="" method="POST">
-                    <!-- <button type="submit" name="view-details">View Details</button> -->
-                    <button type="submit" name="edit-details">Edit Details</button>
+                <form class="panel-form" action="../include/student/operations.inc.php" method="POST">
+                    <button type="submit" name="home-student" value="home">Home</button>
+                    <button type="submit" name="view-details" value="view">View Details</button>
+                    <button type="submit" name="edit-details" value="edit">Edit Details</button>
                 </form>
             </div>
+
+            <!-- start of Div -->
             <div class="school-data">
-                <!-- <p>
-                    Hello, <?php //echo $_SESSION['name'] 
-                            ?>. <br>
-                    You can view your details and edit them in this panel by using the above buttons.
-                </p> -->
+                <?php
 
-                <h2>Hello, <?php echo $_SESSION['name'] ?> </h2>
-                <p>Your details have been given below.<br>
-                    To <strong>EDIT</strong> your details click of "Edit Details" button above.</p>
+                $page = $_SESSION['page'];
+                // echo $page;
+                require("../studentDashboard/$page");
+                ?>
 
-
-                <div class="view-box">
-                    <div class="flex-box">
-                        <div class="label-box">
-
-                            <div class="input-items">
-                                <label>Name: </label>
-                                <input type="text" value="<?php echo $_SESSION['name'];
-                                                            ?>" readonly />
-                            </div>
-                            <div class="input-items">
-                                <label>Class: </label>
-                                <input type="text" value="<?php echo $_SESSION['class'];
-                                                            ?>" readonly />
-                            </div>
-                            <div class="input-items">
-                                <label>RollNo: </label>
-                                <input type="text" value="<?php echo $_SESSION['rollno'];
-                                                            ?>" readonly />
-                            </div>
-                            <div class="input-items">
-                                <label>Email ID: </label>
-                                <input type="text" value="<?php echo $_SESSION['email'];
-                                                            ?>" readonly />
-                            </div>
-                            <div class="input-items">
-                                <label>User Name: </label>
-                                <input type="text" value="<?php echo $_SESSION['username'];
-                                                            ?>" readonly />
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             </div>
-            <!-- 
-                <div class="view-student">
-                    <div class="student-items">
-                        <label>Name: </label>
-                        <input type="text" value="<?php //echo $_SESSION['name']; 
-                                                    ?>" readonly/>
-                    </div>
-                    <div class="student-items">
-                        <label>Class: </label>
-                        <input type="text" value="<?php //echo $_SESSION['class']; 
-                                                    ?>" readonly/>
-                    </div>
-                    <div class="student-items">
-                        <label>RollNo: </label>
-                        <input type="text" value="<?php //echo $_SESSION['rollno']; 
-                                                    ?>" readonly/>
-                    </div>
-                    <div class="student-items">
-                        <label>Email ID: </label>
-                        <input type="text" value="<?php //echo $_SESSION['email']; 
-                                                    ?>" readonly/>
-                    </div>
-                    <div class="student-items">
-                        <label>UserName: </label>
-                        <input type="text" value="<?php //echo $_SESSION['username']; 
-                                                    ?>" readonly/>
-                    </div>
-                </div> -->
+        </div> -->
+        </div>
+        <!-- End of Div -->
 
         </div>
         </div>

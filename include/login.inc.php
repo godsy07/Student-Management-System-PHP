@@ -24,10 +24,9 @@ if (isset($_POST['submit'])) {
                         $_SESSION['id'] = $row['id'];
                         $_SESSION['name'] = $row['name'];
                         $_SESSION['email'] = $row['email'];
-                        $_SESSION['rollno'] = $row['rollno'];
-                        $_SESSION['class'] = $row['class'];
-                        $_SESSION['username'] = $row['username'];
-                        // $_SESSION['password'] = $row['password'];
+
+                        $_SESSION['page'] = "default.php";
+                        // echo $_SESSION['page'];
                         header("Location: ../studentDashboard/studentPanel.php?login=success");
                         exit();
                     } else {

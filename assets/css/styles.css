@@ -154,3 +154,7 @@ button:hover {
   width: 50%;
   justify-content: center;
 }
+.edit-form button {
+  border-radius: 10px;
+  background-color: skyblue;
+}
