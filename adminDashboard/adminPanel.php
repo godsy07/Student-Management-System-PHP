@@ -33,6 +33,7 @@ if (!empty($_SESSION)) {
             <h1>Admin Dashboard</h1>
             <div class="admin-panel">
                 <form class="panel-form" action="admin-actions/admin-actions.inc.php" method="POST">
+                    <button type="submit" name="view-home">Home</button>
                     <button type="submit" name="view-students">View Students</button>
                     <button type="submit" name="view-teachers">View Teachers</button>
                     <button type="submit" name="search-student">Search Student</button>

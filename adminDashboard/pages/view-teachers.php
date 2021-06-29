@@ -1,5 +1,5 @@
-<button class="add-student">Add Student</button>
-<h2>Details of Students</h2>
+<button class="add-student">Add Teacher</button>
+<h2>Details of Teachers</h2>
 <!-- <br> -->
 <?php
 
@@ -7,16 +7,14 @@ $data = $_SESSION['returnData'];
 if ($data == 1) {
 ?>
 
-    <table class="data-students">
+    <table class="data-teachers">
         <thead>
             <!-- <caption>Details of the Students</caption> -->
             <tr>
                 <th>Sl.No.</th>
-                <th>Student Name</th>
-                <th>Class</th>
-                <th>Roll No</th>
+                <th>Teacher Name</th>
                 <th>Email Address</th>
-                <th>User Name</th>
+                <th>Subjects</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -30,10 +28,8 @@ if ($data == 1) {
             echo "<tr>";
             echo "<td>" . $count . "</td>";
             echo "<td>" . ucfirst($detail['name']) . "</td>";
-            echo "<td>" . $detail['class'] . "</td>";
-            echo "<td>" . $detail['rollno'] . "</td>";
             echo "<td>" . $detail['email'] . "</td>";
-            echo "<td>" . $detail['username'] . "</td>";
+            echo "<td>" . ucfirst($detail['subjects']) . "</td>";
             echo "<td> Edit </td>";
             echo "<td> Delete </td>";
             echo "</tr>";
@@ -44,7 +40,7 @@ if ($data == 1) {
 } elseif ($data == 0) {
     ?>
     <div class="data-not-found">
-        <p>It Seems you have not saved details for any student.</p>
+        <p>It Seems you have not saved details for any teacher.</p>
     </div>
     <?php
 }

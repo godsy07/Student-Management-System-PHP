@@ -24,17 +24,19 @@ CREATE TABLE `student` (
     PRIMARY KEY(id)
 );
 
-CREATE TABLE `teacher` (
-    `id` int(11) AUTO_INCREMENT, 
-    `name` varchar(255) NOT NULL, 
-    `email` varchar(255) NOT NULL, 
-    `password` varchar(255) NOT NULL, 
-    `subject` varchar(255), 
-    PRIMARY KEY(id)
-);
-
 INSERT INTO student (name, rollno, class, email, username, password)
 VALUES ('Godsy', 21, 8, 'godson@nomail.com','godsy_07','godsy@123');
 INSERT INTO student (name, rollno, class, email, username, password)
 VALUES ('raj', 22, 9, 'raj@nomail.com','raj_22','raj@123');
 
+CREATE TABLE `teachers` (
+    `id` int(11) AUTO_INCREMENT, 
+    `name` varchar(255) NOT NULL, 
+    `email` varchar(255) NOT NULL, 
+    `password` varchar(255) NOT NULL, 
+    `subjects` varchar(255), 
+    PRIMARY KEY(id)
+);
+
+INSERT INTO teachers (name, email, password, subjects)
+VALUES ('Rahul', 'rahul@nomail.com', 'rahul@123', 'Computer');

@@ -168,16 +168,6 @@ table {
   border: 3px solid purple;
   /* overflow: scroll; */
 }
-/* caption {
-  font-size: 20px;
-  font-weight: bold;
-  font-style: italic;
-} */
-/* thead {
-  background: url(leopardskin.jpg);
-  color: white;
-  text-shadow: 1px 1px 1px black;
-} */
 thead th {
   background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
   border: 2px solid rgb(45, 4, 46);
@@ -190,16 +180,10 @@ thead th:first-child {
   width: 30px;
 }
 thead th:last-child {
-  width: 100px;
+  width: 60px;
 }
-thead th:nth-child(3) {
-  width: 100px;
-}
-thead th:nth-child(4) {
-  width: 100px;
-}
-thead th:nth-child(7) {
-  width: 100px;
+thead th:nth-last-child(2) {
+  width: 60px;
 }
 th, td {
   padding: 15px;
@@ -211,6 +195,12 @@ tbody tr:nth-child(odd) {
 
 tbody tr:nth-child(even) {
   background-color: #d0d0d1;
+}
+.data-students thead th:nth-child(3) {
+  width: 80px;
+}
+.data-students thead th:nth-child(4) {
+  width: 80px;
 }
 
 .data-not-found {
