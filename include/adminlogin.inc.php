@@ -26,6 +26,7 @@
                             $_SESSION['email'] = $email;
                             // $_SESSION['password'] = $password;
 
+                            $_SESSION['page'] = "/pages/default-page.php";
                             header("Location: ../adminDashboard/adminPanel.php?login=success");
                             exit();
                         } else {

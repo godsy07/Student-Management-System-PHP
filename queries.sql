@@ -35,3 +35,6 @@ CREATE TABLE `teacher` (
 
 INSERT INTO student (name, rollno, class, email, username, password)
 VALUES ('Godsy', 21, 8, 'godson@nomail.com','godsy_07','godsy@123');
+INSERT INTO student (name, rollno, class, email, username, password)
+VALUES ('raj', 22, 9, 'raj@nomail.com','raj_22','raj@123');
+

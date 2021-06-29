@@ -158,3 +158,78 @@ button:hover {
   border-radius: 10px;
   background-color: skyblue;
 }
+
+/* Styles for Admin Page */
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid purple;
+  /* overflow: scroll; */
+}
+/* caption {
+  font-size: 20px;
+  font-weight: bold;
+  font-style: italic;
+} */
+/* thead {
+  background: url(leopardskin.jpg);
+  color: white;
+  text-shadow: 1px 1px 1px black;
+} */
+thead th {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+  border: 2px solid rgb(45, 4, 46);
+}
+table td {
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+}
+thead th:first-child {
+  width: 30px;
+}
+thead th:last-child {
+  width: 100px;
+}
+thead th:nth-child(3) {
+  width: 100px;
+}
+thead th:nth-child(4) {
+  width: 100px;
+}
+thead th:nth-child(7) {
+  width: 100px;
+}
+th, td {
+  padding: 15px;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #f9ffff;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #d0d0d1;
+}
+
+.data-not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  font-size: 25px;
+  width: 100%;
+}
+button.add-student {
+  background-color: rgb(20, 212, 238);
+  /* display: flex; */
+  border-radius: 10px;
+  float: right;
+  right: 30px;
+  padding: 5px;
+}
+button.add-student:hover {
+  background-color: rgb(54, 241, 154);
+  /* color: rgb(250, 251, 255); */
+}

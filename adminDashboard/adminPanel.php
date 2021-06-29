@@ -32,14 +32,17 @@ if (!empty($_SESSION)) {
         <div class="panel">
             <h1>Admin Dashboard</h1>
             <div class="admin-panel">
-                <form class="panel-form" action="" method="POST">
+                <form class="panel-form" action="admin-actions/admin-actions.inc.php" method="POST">
                     <button type="submit" name="view-students">View Students</button>
                     <button type="submit" name="view-teachers">View Teachers</button>
-                    <button type="submit" name="search-students">Search Student</button>
+                    <button type="submit" name="search-student">Search Student</button>
                 </form>
             </div>
             <div class="school-data">
-                To fetch details click on the respective buttons above.
+                <?php
+                    $page = $_SESSION['page'];
+                    include("../adminDashboard".$page);
+                ?>
             </div>
         </div>
 
