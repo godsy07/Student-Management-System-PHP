@@ -5,7 +5,7 @@
 <div class="view-box">
     <div class="flex-box">
         <div class="label-box">
-            <form class="edit-form" method="POST" action="../include/student/operations.inc.php">
+            <form class="edit-form" method="POST" action="/student-actions/operations.inc.php">
                 <div class="input-items">
                     <label>Name: </label>
                     <input type="text" name="name" value="<?php echo $_SESSION['name'];

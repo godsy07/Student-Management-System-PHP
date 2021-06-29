@@ -25,7 +25,7 @@ if (!empty($_SESSION)) {
             Welcome, <?php echo $_SESSION['name']; ?>
         </span>
 
-        <form action="../include/admin/logout.inc.php" method="POST">
+        <form action="admin-actions/logout.inc.php" method="POST">
             <button class="sign-out" name="sign-out" type="submit">Sign Out</button>
         </form>
 

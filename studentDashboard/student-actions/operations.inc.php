@@ -121,6 +121,6 @@ if (!empty($_SESSION)) {
         }
     }
 } else {
-    header("Location: ../login.php?authentication=error");
+    header("Location: ../../login.php?authentication=error");
     exit();
 }

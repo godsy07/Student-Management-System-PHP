@@ -38,14 +38,14 @@ if (!empty($_SESSION)) {
             Welcome, <?php echo $_SESSION['name'] ?>
         </span>
 
-        <form action="../include/student/logout.inc.php" method="POST">
+        <form action="student-actions/logout.inc.php" method="POST">
             <button class="sign-out" name="sign-out" type="submit">Sign Out</button>
         </form>
 
         <div class="panel">
             <h1>Student Dashboard</h1>
             <div class="student-panel">
-                <form class="panel-form" action="../include/student/operations.inc.php" method="POST">
+                <form class="panel-form" action="student-actions/operations.inc.php" method="POST">
                     <button type="submit" name="home-student" value="home">Home</button>
                     <button type="submit" name="view-details" value="view">View Details</button>
                     <button type="submit" name="edit-details" value="edit">Edit Details</button>

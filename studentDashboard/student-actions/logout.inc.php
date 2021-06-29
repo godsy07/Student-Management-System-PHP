@@ -10,6 +10,6 @@ if (!empty($_SESSION)) {
         exit();
     }
 } else {
-    header("Location: ../login.php?authentication=error");
+    header("Location: ../../login.php?authentication=error");
     exit();
 }
