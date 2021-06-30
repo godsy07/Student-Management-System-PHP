@@ -223,3 +223,59 @@ button.add-student:hover {
   background-color: rgb(54, 241, 154);
   /* color: rgb(250, 251, 255); */
 }
+
+
+#search-student {
+  /* padding: 30px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#search-student p {
+  font-size: 19px;
+  font-style: italic;
+  font-weight: bold;
+}
+#search-student form {
+  display: flex;
+  flex-direction: column;
+  width: 30%;;
+  align-items: center;
+  justify-content: center;
+  /* padding: 10px; */
+  /* background-color: aqua; */
+}
+
+#search-student form .search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.search div {
+  display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  height: 40px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 17px;
+  font-weight: bolder;
+}
+.search input {
+  width: 65%;
+  height: 30px;
+  border-radius: 10px;
+}
+#search-student form button {
+  width: 50%;
+  background-color: rgb(32, 243, 95);
+  border-radius: 10px;
+  font-weight: bolder;
+}
+#search-student form button:hover {
+  background-color: lightseagreen;
+}

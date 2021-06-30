@@ -78,10 +78,52 @@ if (!empty($_SESSION)) {
     //Check for Search Student Page
     if (isset($_POST['search-student'])) {
         //Code for Search student page redirect info
+        $_SESSION['page'] = '/pages/search-student.php';
+        header("Location: ../adminPanel.php?page=search-student");
+        exit();
     }
     //Check for Seacrh Student Query
-    if (isset($_POST['student'])) {
+    if (isset($_POST['search-student-action'])) {
         //Code for viewing View a particular student info
+        // print_r($_POST);
+
+        if ((empty($_POST['rollno']) or empty($_POST['class'])) and empty($_POST['email'])) {
+            //No value entered, So return error
+            // $_SESSION['page'] = '/pages/search-student.php';
+            header("Location: ../adminPanel.php?search-student=empty-fields");
+            exit();
+        } elseif (!empty($_POST['rollno']) and !empty($_POST['class'])) {
+            $rollno = $_POST['rollno'];
+            $class = $_POST['class'];
+            $sql = "SELECT * FROM student";
+            $result = mysqli_query($conn, $sql);
+            $resultCheck = mysqli_num_rows($result);
+            if ($resultCheck > 0) {
+                $returnArray;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    if (($row['rollno'] == $rollno) and ($row['class'] == $class)) {
+                        $returnArray = $row;
+                        break;
+                    }
+                }
+                if (!empty($returnArray)) {
+                    $_SESSION['action-data'] = $returnArray;
+                    $_SESSION['page'] = '/pages/student-details.php';
+                    header("Location: ../adminPanel.php");
+                    exit();
+                } else {
+                    //Invalid Entry so data not found
+                    header("Location: ../adminPanel.php?search-student=invalid-entry");
+                    exit();
+                }
+            } else {
+                //Data could not be fetched
+                header("Location: ../adminPanel.php?search-student=no-data");
+                exit();
+            }
+        } elseif (!empty($_POST['email'])) {
+            $email = $_POST['email'];
+        }
     }
 } else {
     header("Location: ../login.php?authentication=error");
