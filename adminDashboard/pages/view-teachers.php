@@ -30,8 +30,16 @@ if ($data == 1) {
             echo "<td>" . ucfirst($detail['name']) . "</td>";
             echo "<td>" . $detail['email'] . "</td>";
             echo "<td>" . ucfirst($detail['subjects']) . "</td>";
-            echo "<td> Edit </td>";
-            echo "<td> Delete </td>";
+            echo "<td> 
+                    <span>
+                        <img class='icons' src='../assets/images/icons/edit.png'>
+                    </span> 
+                </td>";
+            echo "<td> 
+                    <span>
+                        <img class='icons' src='../assets/images/icons/delete.png'>
+                    </span> 
+                </td>";
             echo "</tr>";
         }
         ?>

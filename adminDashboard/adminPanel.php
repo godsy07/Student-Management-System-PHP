@@ -16,6 +16,18 @@ if (!empty($_SESSION)) {
 
         <link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
 
+        <script>
+            <?php
+
+                if (!empty($_SESSION['message'])) {
+                    echo "alert('" . $_SESSION['message'] . "')";
+                    unset($_SESSION['message']);
+                }
+
+            ?>
+        </script>
+
+
         <title>Admin Dashboard</title>
     </head>
 

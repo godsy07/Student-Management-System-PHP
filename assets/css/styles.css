@@ -279,3 +279,8 @@ button.add-student:hover {
 #search-student form button:hover {
   background-color: lightseagreen;
 }
+
+.icons {
+  /* height: 10px; */
+  width: 14px;
+}

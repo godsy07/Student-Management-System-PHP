@@ -12,7 +12,7 @@
 <div class="view-box">
     <div class="flex-box">
         <div class="label-box">
-            <form class="edit-form" method="POST" action="">
+            <form class="edit-form" method="POST" action="admin-actions/admin-actions.inc.php">
                 <div class="input-items">
                     <label>Name: </label>
                     <input type="text" name="name" value="<?php echo $data["name"];
@@ -40,7 +40,7 @@
                 </div>
                     <input type="hidden" name="id" value="<?php echo $data["id"]; ?>">
                 <div class="input-items">
-                    <button name="edit" type="submit">Submit Details</button>
+                    <button name="edit-info" type="submit">Submit Details</button>
                 </div>
             </form>
         </div>

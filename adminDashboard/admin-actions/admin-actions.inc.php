@@ -99,7 +99,7 @@ if (!empty($_SESSION)) {
             $result = mysqli_query($conn, $sql);
             $resultCheck = mysqli_num_rows($result);
             if ($resultCheck > 0) {
-                $returnArray;
+                $returnArray = [];
                 while ($row = mysqli_fetch_assoc($result)) {
                     if (($row['rollno'] == $rollno) and ($row['class'] == $class)) {
                         $returnArray = $row;
@@ -123,6 +123,68 @@ if (!empty($_SESSION)) {
             }
         } elseif (!empty($_POST['email'])) {
             $email = $_POST['email'];
+            $sql = "SELECT * FROM student";
+            $result = mysqli_query($conn, $sql);
+            $resultCheck = mysqli_num_rows($result);
+            if ($resultCheck > 0) {
+                $returnArray = [];
+                while ($row = mysqli_fetch_assoc($result)) {
+                    if ($row['email'] == $email) {
+                        $returnArray = $row;
+                        break;
+                    }
+                }
+                if (!empty($returnArray)) {
+                    // print_r($returnArray);
+                    $_SESSION['action-data'] = $returnArray;
+                    $_SESSION['page'] = '/pages/student-details.php';
+                    header("Location: ../adminPanel.php");
+                    exit();
+                } else {
+                    //Invalid Entry so data not found
+                    header("Location: ../adminPanel.php?search-student=invalid-entry");
+                    exit();
+                }
+            } else {
+                //Data could not be fetched
+                header("Location: ../adminPanel.php?search-student=no-data");
+                exit();
+            }
+        } else {
+            header("Location: ../adminPanel.php?error=encountered");
+            exit();
+        }
+    }
+
+    //Edit Student Details 
+    if (isset($_POST['edit-info'])) {
+        //Edit request to edit student details
+        // print_r($_POST);
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $class = $_POST['class'];
+        $rollno = $_POST['rollno'];
+        $email = $_POST['email'];
+        $username = $_POST['username'];
+        $sql = "UPDATE student 
+                SET name='$name', class='$class', rollno='$rollno', email='$email', username='$username' 
+                WHERE id=$id";
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            // echo "Query Success";
+            $fetch = "SELECT * FROM student WHERE id=$id";
+            $res = mysqli_query($conn, $fetch);
+            $row = mysqli_fetch_assoc($res);
+            // print_r($row);
+            $_SESSION['message'] = "Successfully Edited";
+            $_SESSION['action-data'] = $row;
+            header("Location: ../adminPanel.php?edit=success");
+            exit();
+        } else {
+            // echo "Failed";
+            $_SESSION['message'] = "Editing Failed Unexpectedly";
+            header("Location: ../adminPanel.php?error=unexpected");
+            exit();
         }
     }
 } else {
