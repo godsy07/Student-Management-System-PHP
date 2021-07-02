@@ -37,7 +37,7 @@ button:hover {
 .row {
   position: absolute;
   top: 10%;
-  width: auto;
+  width: 35%;
   background-color: skyblue;
   border: 1px solid blue;
   border-radius: 2%;
@@ -46,7 +46,7 @@ button:hover {
 .form {
   display: flex;
   flex-direction: column;
-  width: 30vw;
+  /* width: 30vw; */
 }
 .form .form-items {
   padding: 10px;
@@ -115,15 +115,13 @@ button:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
   .flex-box {
     display: flex;
     padding: 10px;
     align-items: center;
     justify-content: center;
-    /* background-color: red; */
-    min-width: 460px;
-    max-width: 500px;
     height: 250px;
   }
   .label-box {
@@ -171,7 +169,6 @@ table {
   width: 100%;
   border-collapse: collapse;
   border: 3px solid purple;
-  /* overflow: scroll; */
 }
 thead th {
   background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
@@ -248,8 +245,6 @@ button.add-student:hover {
   width: 30%;;
   align-items: center;
   justify-content: center;
-  /* padding: 10px; */
-  /* background-color: aqua; */
 }
 
 #search-student form .search {
@@ -290,3 +285,27 @@ button.add-student:hover {
   width: 16px;
 }
 
+@media screen and (max-width: 600px) {
+  .row {
+    position: absolute;
+    top: 10%;
+    width: 80%;
+    background-color: skyblue;
+    border: 1px solid blue;
+    border-radius: 2%;
+    padding: 30px;
+  }
+  
+  #search-student form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  table {
+    display: block;
+    overflow-y: scroll;
+  }
+}

@@ -11,7 +11,6 @@ if ($data == 1) {
 
     <table class="data-students">
         <thead>
-            <!-- <caption>Details of the Students</caption> -->
             <tr>
                 <th>Sl.No.</th>
                 <th>Student Name</th>
@@ -27,7 +26,6 @@ if ($data == 1) {
         <?php
         $actiondata = $_SESSION['action-data'];
         $count = 0;
-        // print_r($actiondata);
         foreach ($actiondata as $detail) {
             if (empty($detail['email'])) {
                 $detail['email'] = "NA";
