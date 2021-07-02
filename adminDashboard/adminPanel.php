@@ -16,18 +16,6 @@ if (!empty($_SESSION)) {
 
         <link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
 
-        <script>
-            <?php
-
-                if (!empty($_SESSION['message'])) {
-                    echo "alert('" . $_SESSION['message'] . "')";
-                    unset($_SESSION['message']);
-                }
-
-            ?>
-        </script>
-
-
         <title>Admin Dashboard</title>
     </head>
 
@@ -53,11 +41,23 @@ if (!empty($_SESSION)) {
             </div>
             <div class="school-data">
                 <?php
-                    $page = $_SESSION['page'];
-                    include("../adminDashboard".$page);
+                $page = $_SESSION['page'];
+                // echo $page;
+                include("../adminDashboard" . $page);
                 ?>
             </div>
         </div>
+
+        <script>
+            <?php
+
+            if (!empty($_SESSION['message'])) {
+                echo "alert('" . $_SESSION['message'] . "')";
+                unset($_SESSION['message']);
+            }
+
+            ?>
+        </script>
 
     </body>
 

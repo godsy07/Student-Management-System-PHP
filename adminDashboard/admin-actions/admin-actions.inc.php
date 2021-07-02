@@ -156,6 +156,122 @@ if (!empty($_SESSION)) {
         }
     }
 
+    //Handle Edit and Delete requests
+    if (isset($_POST['edit-student-details'])) {
+        $id = $_POST['id'];
+        $fetch = "SELECT * FROM student WHERE id=$id";
+        $fetchQuery = mysqli_query($conn, $fetch);
+        if ($fetchQuery) {
+            $returnArray = [];
+            while ($row = mysqli_fetch_assoc($fetchQuery)) {
+                $returnArray = $row;
+            }
+            $_SESSION['action-data'] = $returnArray;
+            $_SESSION['page'] = '/pages/student-details.php';
+            header("Location: ../adminPanel.php?page=edit-student");
+            exit();
+        } else {
+            $_SESSION['message'] = "Something went wrong";
+            header("Location: ../adminPanel.php?error=unexpected");
+            exit();
+        }
+    }
+
+    if (isset($_POST['edit-teacher-details'])) {
+        $id = $_POST['id'];
+        $fetch = "SELECT * FROM teachers WHERE id=$id";
+        $fetchQuery = mysqli_query($conn, $fetch);
+        if ($fetchQuery) {
+            $returnArray = [];
+            while ($row = mysqli_fetch_assoc($fetchQuery)) {
+                $returnArray = $row;
+            }
+            $_SESSION['action-data'] = $returnArray;
+            $_SESSION['page'] = '/pages/teacher-details.php';
+            header("Location: ../adminPanel.php?page=edit-teacher");
+            exit();
+        } else {
+            $_SESSION['message'] = "Something went wrong";
+            header("Location: ../adminPanel.php?error=unexpected");
+            exit();
+        }
+    }
+    //Edit Teacher details submission
+    if (isset($_POST['edit-teacher-submit'])) {
+        print_r($_POST);
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $subjects = $_POST['subjects'];
+        $password = $_POST['password'];
+        
+        $sql = "UPDATE teachers 
+            SET name='$name', email='$email', subjects='$subjects', password='$password' 
+            WHERE id=$id";
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            // echo "Query Success";
+            $fetch = "SELECT * FROM teachers WHERE id=$id";
+            $res = mysqli_query($conn, $fetch);
+            $row = mysqli_fetch_assoc($res);
+            // print_r($row);
+            $_SESSION['message'] = "Successfully Edited";
+            $_SESSION['action-data'] = $row;
+            header("Location: ../adminPanel.php?edit-teacher=success");
+            exit();
+        } else {
+            // echo "Failed";
+            $_SESSION['message'] = "Editing Failed Unexpectedly";
+            header("Location: ../adminPanel.php?error=unexpected");
+            exit();
+        }
+    }
+
+    if (isset($_POST['delete-student-details'])) {
+        $id = $_POST['id'];
+        $delete= "DELETE FROM student WHERE id='$id'";
+        if (mysqli_query($conn, $delete)) {
+            $sql = "SELECT * FROM student";
+            $result = mysqli_query($conn, $sql);
+            $resultCheck = mysqli_num_rows($result);
+            $returnArray = [];
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $returnArray[] = $row;
+                    break;
+                }
+            $_SESSION['action-data'] = $returnArray;
+            $_SESSION['message'] = "Record successfully Deleted";
+            header("Location: ../adminPanel.php?delete_student=success");
+            exit();
+        } else {
+            $_SESSION['message'] = "Record Deletion FAILED";
+            header("Location: ../adminPanel.php?delete_student=failed");
+            exit();
+        }
+    }
+    if (isset($_POST['delete-teacher-details'])) {
+        $id = $_POST['id'];
+        $delete= "DELETE FROM student WHERE id='$id'";
+        if (mysqli_query($conn, $delete)) {
+            $sql = "SELECT * FROM teachers";
+            $result = mysqli_query($conn, $sql);
+            $resultCheck = mysqli_num_rows($result);
+            $returnArray = [];
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $returnArray[] = $row;
+                    break;
+                }
+            $_SESSION['action-data'] = $returnArray;
+            $_SESSION['message'] = "Record successfully Deleted";
+            header("Location: ../adminPanel.php?delete_student=success");
+            exit();
+        } else {
+            $_SESSION['message'] = "Record Deletion FAILED";
+            header("Location: ../adminPanel.php?delete_student=failed");
+            exit();
+        }
+    }
+
     //Edit Student Details 
     if (isset($_POST['edit-info'])) {
         //Edit request to edit student details
@@ -166,8 +282,9 @@ if (!empty($_SESSION)) {
         $rollno = $_POST['rollno'];
         $email = $_POST['email'];
         $username = $_POST['username'];
+        $password = $_POST['password'];
         $sql = "UPDATE student 
-                SET name='$name', class='$class', rollno='$rollno', email='$email', username='$username' 
+                SET name='$name', class='$class', rollno='$rollno', email='$email', username='$username', password='$password' 
                 WHERE id=$id";
         $result = mysqli_query($conn, $sql);
         if ($result) {
@@ -178,13 +295,136 @@ if (!empty($_SESSION)) {
             // print_r($row);
             $_SESSION['message'] = "Successfully Edited";
             $_SESSION['action-data'] = $row;
-            header("Location: ../adminPanel.php?edit=success");
+            header("Location: ../adminPanel.php?edit-student=success");
             exit();
         } else {
             // echo "Failed";
             $_SESSION['message'] = "Editing Failed Unexpectedly";
             header("Location: ../adminPanel.php?error=unexpected");
             exit();
+        }
+    }
+
+    //Adding teachers and students
+    if (isset($_POST['add-teacher'])) {
+        $_SESSION['page'] = '/pages/add-teacher.php';
+        header("Location: ../adminPanel.php?page=add-teacher");
+        exit();
+    }
+    if (isset($_POST['add-student'])) {
+        $_SESSION['page'] = '/pages/add-student.php';
+        header("Location: ../adminPanel.php?page=add-student");
+        exit();
+    }
+    //Submit add Teacher data
+    if (isset($_POST['submit-teacher'])) {
+        $name = $_POST['name'];
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        // $email = $_POST['email'];
+        $subject = $_POST['subject'];
+        $password = $_POST['password'];
+        $confirmPassword = $_POST['confirm-password'];
+
+        if (empty($name) || empty($email) || empty($subject) || empty($password) || empty($confirmPassword)) {
+            $_SESSION['message'] = 'Please Enter the details to submit';
+            header("Location: ../adminPanel.php?input=empty");
+            exit();
+        } else {
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                if ($password == $confirmPassword) {
+                    $fetch = "SELECT * FROM teachers";
+                    $res = mysqli_query($conn, $fetch);
+                    $array = [];
+                    if (mysqli_num_rows($res) > 0) {
+                        while ($row = mysqli_fetch_assoc($res)) {
+                            $array = $row;
+                        }
+                    }
+                    if (!empty($array)) {
+                        if ($array['email'] == $email) {
+                            $_SESSION['message'] = 'Email already exists';
+                            header("Location: ../adminPanel.php?email=invalid");
+                            exit();
+                        }
+                    }
+                    $save = "INSERT INTO teachers (name, email, password, subjects)
+                        VALUES ('$name', '$email', '$password', '$subject')";
+                    if (mysqli_query($conn, $save)) {
+                        $_SESSION['message'] = 'Data saved successfully';
+                        header("Location: ../adminPanel.php?add-teacher=success");
+                        exit();
+                    } else {
+                        $_SESSION['message'] = 'Something went wrong. Data could not be saved';
+                        header("Location: ../adminPanel.php?unexpected_error");
+                        exit();
+                    }
+                } else {
+                    $_SESSION['message'] = 'Passwords do not match';
+                    header("Location: ../adminPanel.php?password=not_same");
+                    exit();
+                }
+            } else {
+                $_SESSION['message'] = 'Invalid Email';
+                header("Location: ../adminPanel.php?email=invalid");
+                exit();
+            }
+        }
+    }
+    //Submit add Student data
+    if (isset($_POST['submit-student'])) {
+        $name = $_POST['name'];
+        $class = $_POST['class'];
+        $rollno = $_POST['rollno'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $confirmPassword = $_POST['confirm-password'];
+
+        if (empty($name) || empty($class) || empty($rollno) || empty($username) || empty($password) || empty($confirmPassword)) {
+            $_SESSION['message'] = 'Please Enter the details to submit';
+            header("Location: ../adminPanel.php?input=empty");
+            exit();
+        } else {
+            $email = '';
+            if (!empty($_POST['email'])) {
+                $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $_SESSION['message'] = 'Invalid Email';
+                    header("Location: ../adminPanel.php?email=invalid");
+                    exit();
+                }
+            }
+            if ($password == $confirmPassword) {
+                $fetch = "SELECT * FROM students";
+                $res = mysqli_query($conn, $fetch);
+                $array = [];
+                if (mysqli_num_rows($res) > 0) {
+                    while ($row = mysqli_fetch_assoc($res)) {
+                        $array = $row;
+                    }
+                }
+                if (!empty($array)) {
+                    if (($array['email'] == $email) || ($array['username'] == $username)) {
+                        $_SESSION['message'] = 'Email OR UserName already exists';
+                        header("Location: ../adminPanel.php?email_or_username=invalid");
+                        exit();
+                    }
+                }
+                $save = "INSERT INTO student (name, rollno, class, email, username, password)
+                    VALUES ('$name', '$rollno', '$class','$email', '$username','$password')";
+                if (mysqli_query($conn, $save)) {
+                    $_SESSION['message'] = 'Data saved successfully';
+                    header("Location: ../adminPanel.php?add-student=success");
+                    exit();
+                } else {
+                    $_SESSION['message'] = 'Something went wrong. Data could not be saved';
+                    header("Location: ../adminPanel.php?unexpected_error");
+                    exit();
+                }
+            } else {
+                $_SESSION['message'] = 'Passwords do not match';
+                header("Location: ../adminPanel.php?password=not_same");
+                exit();
+            }
         }
     }
 } else {

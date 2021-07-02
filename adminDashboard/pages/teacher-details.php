@@ -4,7 +4,7 @@
 
 ?>
 
-<p>Below are the details of Student.</p>
+<p>Below are the details of Teacher.</p>
 <p>To Edit, perform change them "Submit".</p>
 
 
@@ -18,23 +18,13 @@
                                                 ?>" />
                 </div>
                 <div class="input-items">
-                    <label>Class: </label>
-                    <input type="text" name="class" value="<?php echo $data["class"];
-                                                ?>" />
-                </div>
-                <div class="input-items">
-                    <label>RollNo: </label>
-                    <input type="text" name="rollno" value="<?php echo $data["rollno"];
-                                                ?>" />
-                </div>
-                <div class="input-items">
                     <label>Email ID: </label>
                     <input type="email" name="email" value="<?php echo $data["email"];
-                                                ?>" placeholder="Not Available" />
+                                                ?>" />
                 </div>
                 <div class="input-items">
-                    <label>User Name: </label>
-                    <input type="text" name="username" value="<?php echo $data["username"];
+                    <label>Subject: </label>
+                    <input type="text" name="subjects" value="<?php echo $data["subjects"];
                                                 ?>" />
                 </div>
                 <div class="input-items">
@@ -44,7 +34,7 @@
                 </div>
                     <input type="hidden" name="id" value="<?php echo $data["id"]; ?>">
                 <div class="input-items">
-                    <button name="edit-info" type="submit">Submit Details</button>
+                    <button name="edit-teacher-submit" type="submit">Submit Details</button>
                 </div>
             </form>
         </div>
